@@ -69,7 +69,7 @@ vim.opt.cmdheight = 0
 vim.opt.ruler = false
 
 -- lsp
-vim.lsp.enable({ 'nil', 'lua_ls', 'rust_analyzer' })
+vim.lsp.enable({ 'nil', 'hls', 'lua_ls', 'rust_analyzer' })
 vim.lsp.config('nil', {
 	cmd = { "nil" },
 	filetypes = { "nix" },

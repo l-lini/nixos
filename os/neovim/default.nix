@@ -47,6 +47,8 @@
     cargo
     lua-language-server
     ripgrep
+    ghc
+    haskell-language-server
     # java-language-server
     # asm-lsp
     # bash-language-server
