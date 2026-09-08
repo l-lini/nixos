@@ -21,6 +21,7 @@ do
 	reset()
 	vim.keymap.set("n", "<leader>e", function()
 		config({
+			signs = { severity = ERROR },
 			underline = { severity = ERROR },
 			jump = { severity = ERROR },
 			float = { severity = ERROR }
@@ -28,6 +29,7 @@ do
 	end)
 	vim.keymap.set("n", "<leader>w", function()
 		config({
+			signs = { severity = WARN },
 			underline = { severity = WARN },
 			jump = { severity = WARN },
 			float = { severity = WARN }
@@ -35,6 +37,7 @@ do
 	end)
 	vim.keymap.set("n", "<leader>d", function()
 		config({
+			signs = true,
 			underline = true,
 			float = true,
 			jump = {},
