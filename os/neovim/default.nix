@@ -49,9 +49,9 @@
     ripgrep
     ghc
     haskell-language-server
+    bash-language-server
     # java-language-server
     # asm-lsp
-    # bash-language-server
     # ccls
   ];
 }

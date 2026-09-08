@@ -69,7 +69,11 @@ vim.opt.cmdheight = 0
 vim.opt.ruler = false
 
 -- lsp
-vim.lsp.enable({ 'nil', 'hls', 'lua_ls', 'rust_analyzer' })
+vim.lsp.enable({ 'bash_ls', 'nil', 'hls', 'lua_ls', 'rust_analyzer' })
+vim.lsp.config('bash_ls', {
+	cmd = { "bash-language-server", "start" },
+	filetypes = { "sh" },
+})
 vim.lsp.config('nil', {
 	cmd = { "nil" },
 	filetypes = { "nix" },
