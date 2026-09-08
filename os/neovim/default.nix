@@ -23,18 +23,6 @@
           telescope-file-browser-nvim
           plenary-nvim # dependency for telescope-file-browser
           vim-sleuth
-          # harpoon
-          # undotree
-          # vim-fugitive
-          # nvim-cmp
-          # cmp-buffer
-          # cmp-path
-          # cmp_luasnip
-          # cmp-nvim-lsp
-          # cmp-nvim-lua
-          # luasnip
-          # friendly-snippets
-          # surround-nvim
         ];
       };
     };
@@ -50,8 +38,5 @@
     ghc
     haskell-language-server
     bash-language-server
-    # java-language-server
-    # asm-lsp
-    # ccls
   ];
 }
