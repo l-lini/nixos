@@ -33,7 +33,7 @@ do
 			float = { severity = WARN }
 		})
 	end)
-	vim.keymap.set("n", "<C-d>", function()
+	vim.keymap.set("n", "<C-q>", function()
 		config({
 			underline = true,
 			float = true,
@@ -41,7 +41,7 @@ do
 		})
 	end)
 	vim.keymap.set("n", "<C-x>", reset)
-	vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float)
+	vim.keymap.set("n", "<leader>q", vim.diagnostic.open_float)
 end
 
 -- telescope
