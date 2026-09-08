@@ -1,19 +1,48 @@
 -- keybinds
 vim.g.mapleader = " "
-vim.diagnostic.config({
-	signs = false,
-	underline = false,
-})
-vim.keymap.set("n", "<leader>e", function()
-	vim.diagnostic.config({
-		underline = not vim.diagnostic.config().underline,
-	})
-end)
-vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float)
 vim.opt.wrap = false
 vim.keymap.set("n", "<C-w>", function()
 	vim.opt.wrap = not vim.opt.wrap:get()
 end)
+
+-- diagnostics
+do
+	local ERROR = vim.diagnostic.severity.ERROR
+	local WARN = vim.diagnostic.severity.WARN
+	local config = vim.diagnostic.config
+
+	local reset = function()
+		config({
+			signs = false,
+			underline = false,
+			jump = { severity = {} },
+		})
+	end
+	reset()
+	vim.keymap.set("n", "<C-e>", function()
+		config({
+			underline = { severity = ERROR },
+			jump = { severity = ERROR },
+			float = { severity = ERROR }
+		})
+	end)
+	vim.keymap.set("n", "<C-w>", function()
+		config({
+			underline = { severity = WARN },
+			jump = { severity = WARN },
+			float = { severity = WARN }
+		})
+	end)
+	vim.keymap.set("n", "<C-d>", function()
+		config({
+			underline = true,
+			float = true,
+			jump = {},
+		})
+	end)
+	vim.keymap.set("n", "<C-x>", reset)
+	vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float)
+end
 
 -- telescope
 require("telescope").setup {
@@ -24,7 +53,7 @@ require("telescope").setup {
 	}
 }
 require("telescope").load_extension "file_browser"
-vim.keymap.set("n", "<C-e>", function()
+vim.keymap.set("n", "<leader>e", function()
 	require("telescope").extensions.file_browser.file_browser()
 end)
 
