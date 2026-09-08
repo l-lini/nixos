@@ -64,6 +64,14 @@ vim.api.nvim_create_autocmd('UIEnter', {
 	end,
 })
 
+-- undotree
+vim.keymap.set('n', '<leader>u', function()
+	vim.cmd.UndotreeToggle()
+	vim.cmd.UndotreeFocus()
+end)
+vim.keymap.set('n', '<C-u>', vim.cmd.UndotreeFocus)
+vim.opt.undofile = true
+
 vim.opt.laststatus = 0
 vim.opt.cmdheight = 0
 vim.opt.ruler = false

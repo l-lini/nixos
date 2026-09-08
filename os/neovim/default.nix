@@ -23,6 +23,7 @@
           telescope-file-browser-nvim
           plenary-nvim # dependency for telescope-file-browser
           vim-sleuth
+          undotree
         ];
       };
     };
