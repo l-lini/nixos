@@ -19,28 +19,28 @@ do
 		})
 	end
 	reset()
-	vim.keymap.set("n", "<C-e>", function()
+	vim.keymap.set("n", "<leader>e", function()
 		config({
 			underline = { severity = ERROR },
 			jump = { severity = ERROR },
 			float = { severity = ERROR }
 		})
 	end)
-	vim.keymap.set("n", "<C-w>", function()
+	vim.keymap.set("n", "<leader>w", function()
 		config({
 			underline = { severity = WARN },
 			jump = { severity = WARN },
 			float = { severity = WARN }
 		})
 	end)
-	vim.keymap.set("n", "<C-q>", function()
+	vim.keymap.set("n", "<leader>d", function()
 		config({
 			underline = true,
 			float = true,
 			jump = {},
 		})
 	end)
-	vim.keymap.set("n", "<C-x>", reset)
+	vim.keymap.set("n", "<leader>r", reset)
 	vim.keymap.set("n", "<leader>q", vim.diagnostic.open_float)
 end
 
@@ -53,7 +53,7 @@ require("telescope").setup {
 	}
 }
 require("telescope").load_extension "file_browser"
-vim.keymap.set("n", "<leader>e", function()
+vim.keymap.set("n", "<C-e>", function()
 	require("telescope").extensions.file_browser.file_browser()
 end)
 
@@ -69,7 +69,6 @@ vim.keymap.set('n', '<leader>u', function()
 	vim.cmd.UndotreeToggle()
 	vim.cmd.UndotreeFocus()
 end)
-vim.keymap.set('n', '<C-u>', vim.cmd.UndotreeFocus)
 vim.opt.undofile = true
 
 vim.opt.laststatus = 0
