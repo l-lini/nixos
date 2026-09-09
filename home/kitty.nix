@@ -11,14 +11,6 @@
       font_style = "Bold";
       font_size = 19.0;
       # clear_all_mouse_actions = "yes";
-
-      foreground = "#${color.foreground}";
-      background = "#${color.background}";
-      cursor_text_color = "#${color.background}";
-      selection_foreground = "none";
-      selection_background = "#${color.background}";
-      url_color = "#${color.background}";
-
-    }
+    };
   };
 }

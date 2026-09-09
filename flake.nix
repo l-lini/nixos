@@ -62,9 +62,9 @@
         }
       );
       homeConfigurations =
-        path.dirPathsToAttr ./homes (path: "${args.username}@${path.pathToName path}")
+        path.dirPathsToAttr ./homes (home-path: "${args.username}@${path.pathToName home-path}")
           (
-            path: hostName:
+            home-path: hostName:
             home-manager.lib.homeManagerConfiguration {
               pkgs = import nixpkgs {
                 inherit (args) system;
@@ -74,7 +74,7 @@
                 inherit hostName;
               }
               // args;
-              modules = [ path ];
+              modules = [ home-path ];
             }
           );
     };
