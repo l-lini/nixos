@@ -1,8 +1,6 @@
-# TODO: Volume keybinds
-# TODO: Pavucontrol workspace and keybind
+# TODO: Explicit dependencies
+# TODO: Generate from attribute set
 {
-  # TODO: Store globally in separate file
-  # TODO: Make dependencies on programs explicit
   extra-keybindings ? { },
   extra-assigns ? { },
   extra-startup ? [ ],
@@ -12,46 +10,100 @@
 }:
 
 let
-  keybindings = extra-keybindings // {
-    "Mod4+Return" = "exec kitty";
-    "Mod4+Space" = "exec wofi --show run";
-    "Mod4+Backspace" = "kill";
-    "Mod4+h" = "focus left";
-    "Mod4+l" = "focus right";
-    "Mod4+k" = "focus up";
-    "Mod4+j" = "focus down";
-    "Mod4+w" =
-      ''exec notify-send -t 3000 "$(swaymsg -t get_workspaces -r | jq '.[] | select(.focused) | .name')"'';
-    "Mod4+r" = "exec slurp | grim -g - - | wl-copy";
-    "Mod4+t" = ''exec notify-send -t 3000 "$(date '+%d %A %H:%M:%S')" '';
-    "Mod4+s" = "exec systemctl sleep";
-    "Mod4+x" = "layout toggle split";
-
-    "Mod4+f" = "exec firefox & swaymsg workspace f";
-    "Mod4+Shift+f" = "move to workspace f";
-    "Mod4+q" = "exec qsynth & swaymsg workspace q";
-    "Mod4+Shift+q" = "move to workspace q";
-
-    "Mod4+1" = "workspace 1";
-    "Mod4+Shift+1" = "move to workspace 1";
-    "Mod4+2" = "workspace 2";
-    "Mod4+Shift+2" = "move to workspace 2";
-    "Mod4+3" = "workspace 3";
-    "Mod4+Shift+3" = "move to workspace 3";
-  };
-  # TODO: Store globally along with keybinds
-  assigns = extra-assigns // {
-    q = [
-      {
-        class = "Qsynth";
-      }
-    ];
-    f = [
-      {
+  workspaces = [
+    {
+      name = "firefox";
+      key = "f";
+      command = "firefox";
+      assignment-criteria = {
         app_id = "firefox";
-      }
-    ];
-  };
+      };
+    }
+    {
+      name = "pavucontrol";
+      key = "p";
+      command = "pavucontrol";
+      assignment-criteria = {
+        app_id = "org.pulseaudio.pavucontrol";
+      };
+    }
+    {
+      name = "steam";
+      key = "s";
+      command = "steam";
+      assignment-criteria = {
+        class = "steam";
+      };
+    }
+    {
+      name = "discord";
+      key = "d";
+      command = "discord";
+      assignment-criteria = {
+        class = "discord";
+      };
+    }
+    {
+      name = "qsynth";
+      key = "q";
+      command = "qsynth";
+      assignment-criteria = {
+        class = "Qsynth";
+      };
+    }
+    {
+      # HACK: Had to name it 1 since defaultWorkspace wasn't working
+      name = "1";
+      key = "Space";
+    }
+  ];
+  keybindings =
+    extra-keybindings
+    // {
+      "Mod4+Return" = "exec kitty";
+      "Mod4+Escape" = "exit";
+      "Mod4+Shift+Escape" = "exec poweroff";
+      "Mod4+Tab" = "exec systemctl sleep";
+
+      # TODO: Kill with force (:< no kittens are safe from my wrath muhahahah
+      "Mod4+Backspace" = "kill";
+
+      # TODO: Volume keybinds
+      # TODO: Mute keybinds
+
+      # TODO: move keybinds
+      # TODO: resize keybinds
+      "Mod4+h" = "focus left";
+      "Mod4+l" = "focus right";
+      "Mod4+k" = "focus up";
+      "Mod4+j" = "focus down";
+
+      # TODO: unfocus floating keybind
+
+      # TODO: generate from a list of utility commands
+      # (makes for an easy interface to add utility commands)
+      "Mod4+1" = ''exec notify-send -t 3000 "$(date '+%d %A %H:%M:%S')" '';
+      "Mod4+2" = "exec slurp | grim -g - - | wl-copy";
+
+      # TODO: Fix this keybind or just add move keybinds
+      # "Mod4+x" = "layout toggle split";
+    }
+    // builtins.zipAttrsWith (_: builtins.head) (
+      builtins.map (workspace: {
+        "Mod4+${workspace.key}" =
+          (if builtins.hasAttr "command" workspace then "exec ${workspace.command} & swaymsg " else "")
+          + "workspace ${workspace.name}";
+        "Mod4+Shift+${workspace.key}" = "move to workspace ${workspace.name}";
+      }) workspaces
+    );
+  assigns =
+    extra-assigns
+    // builtins.listToAttrs (
+      builtins.map (workspace: {
+        name = workspace.name;
+        value = [ workspace.assignment-criteria ];
+      }) (builtins.filter (builtins.hasAttr "assignment-criteria") workspaces)
+    );
   startup = extra-startup ++ [
     {
       command = "swaync";
@@ -89,7 +141,6 @@ in
     config = {
       inherit startup assigns keybindings;
       bars = [ ];
-      defaultWorkspace = "workspace number 1";
       floating = {
         modifier = "Mod4";
         border = 0;
