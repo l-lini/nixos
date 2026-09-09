@@ -1,11 +1,12 @@
 # TODO: Explicit dependencies
-# TODO: Generate from attribute set
 {
-  extra-keybindings ? { },
   extra-assigns ? { },
+  extra-keybindings ? { },
   extra-startup ? [ ],
+  extra-utility-commands ? [ ],
 }:
 {
+  # TODO: move parameter defaults to a dependency we are abstracted from sway
   ...
 }:
 
@@ -57,6 +58,11 @@ let
       key = "Space";
     }
   ];
+  utility-commands = [
+    ''exec notify-send -t 3000 "$(date '+%d %A %H:%M:%S')"''
+    "exec slurp | grim -g - - | wl-copy"
+  ]
+  ++ extra-utility-commands;
   keybindings =
     extra-keybindings
     // {
@@ -64,8 +70,6 @@ let
       "Mod4+Escape" = "exit";
       "Mod4+Shift+Escape" = "exec poweroff";
       "Mod4+Tab" = "exec systemctl sleep";
-
-      # TODO: Kill with force (:< no kittens are safe from my wrath muhahahah
       "Mod4+Backspace" = "kill";
 
       # TODO: Volume keybinds
@@ -80,14 +84,10 @@ let
 
       # TODO: unfocus floating keybind
 
-      # TODO: generate from a list of utility commands
-      # (makes for an easy interface to add utility commands)
-      "Mod4+1" = ''exec notify-send -t 3000 "$(date '+%d %A %H:%M:%S')" '';
-      "Mod4+2" = "exec slurp | grim -g - - | wl-copy";
-
       # TODO: Fix this keybind or just add move keybinds
       # "Mod4+x" = "layout toggle split";
     }
+    # Workspace keybindings
     // builtins.zipAttrsWith (_: builtins.head) (
       builtins.map (workspace: {
         "Mod4+${workspace.key}" =
@@ -95,6 +95,12 @@ let
           + "workspace ${workspace.name}";
         "Mod4+Shift+${workspace.key}" = "move to workspace ${workspace.name}";
       }) workspaces
+    )
+    # Utility command keybindings
+    // builtins.zipAttrsWith (_: builtins.head) (
+      builtins.map (i: {
+        "Mod4+${builtins.toString i}" = builtins.elemAt utility-commands (i - 1);
+      }) (builtins.genList (builtins.add 1) (builtins.length utility-commands))
     );
   assigns =
     extra-assigns
