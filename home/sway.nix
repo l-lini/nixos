@@ -10,7 +10,6 @@
   sway-keybinds ? { },
 }:
 {
-  lib,
   ...
 }:
 
@@ -49,11 +48,14 @@
         }
       ]
       ++ sway-startup;
-      assigns =
-        with builtins;
-        mapAttrs (_: app: [
-          { class = lib.toUpper (substring 0 1 app) + substring 1 (stringLength app - 1) app; }
-        ]) (lib.filterAttrs (_: s: isString s) sway-workspaces);
+      # TODO: Store globally along with keybinds
+      assigns = {
+        "q" = [
+          {
+            class = "Qsynth";
+          }
+        ];
+      };
       bars = [ ];
       defaultWorkspace = "workspace number 1";
       floating = {
@@ -78,6 +80,7 @@
             );
           workspaces = attrNames sway-workspaces;
         in
+        # TODO: Store globally in separate file
         {
           "Mod4+Return" = "exec kitty";
           "Mod4+Space" = "exec wofi --show run";
@@ -94,9 +97,15 @@
           "Mod4+t" = ''exec notify-send -t 3000 "$(date '+%d %A %H:%M:%S')" '';
           "Mod4+s" = "exec systemctl sleep";
           "Mod4+x" = "layout toggle split";
+          "Mod4+q" = "exec qsynth & swaymsg workspace q";
+          "Mod4+Shift+q" = "move to workspace q";
         }
-        // generator (n: "Mod4+${n}") (n: "workspace number ${n}") workspaces
-        // generator (n: "Mod4+Shift+${n}") (n: "move to workspace number ${n}") workspaces
+        // generator (workspace-key: "Mod4+${workspace-key}") (
+          workspace-key: "workspace ${workspace-key}"
+        ) workspaces
+        // generator (workspace-key: "Mod4+Shift+${workspace-key}") (
+          workspace-key: "move to workspace ${workspace-key}"
+        ) workspaces
         // sway-keybinds;
       window = {
         border = 0;

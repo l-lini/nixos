@@ -13,15 +13,7 @@
           "1" = null;
           "2" = null;
           "3" = null;
-          "4" = "spotify";
-          "5" = "qsynth";
         };
-        sway-startup = [
-          {
-            command = "qsynth";
-            always = true;
-          }
-        ];
       })
     ];
 
