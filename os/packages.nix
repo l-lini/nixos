@@ -2,7 +2,6 @@
   inputs,
   pkgs,
   pkgs-unstable,
-  scripts,
   system,
   ...
 }:
@@ -29,7 +28,6 @@
       stunnel
       efibootmgr
       disko
-      scripts.tid
     ]
     ++ (with pkgs-unstable; [
       nvcat

@@ -1,4 +1,4 @@
-{ pkgs, scripts, ... }:
+{ pkgs, ... }:
 
 {
   programs = {
@@ -32,6 +32,5 @@
     libnotify
     firefox
     qutebrowser
-    scripts."skärmdump"
   ];
 }

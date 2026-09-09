@@ -1,3 +1,5 @@
+# TODO: Volume keybinds
+# TODO: Pavucontrol workspace and keybind
 {
   sway-workspaces ? {
     "1" = null;
@@ -88,9 +90,8 @@
           "Mod4+j" = "focus down";
           "Mod4+w" =
             ''exec notify-send -t 3000 "$(swaymsg -t get_workspaces -r | jq '.[] | select(.focused) | .num')"'';
-          "Mod4+r" = "exec skärmdump";
-          "Mod4+t" = ''exec notify-send -t 3000 "$(tid)"'';
-          "Mod4+v" = ''exec notify-send -t 3000 "$(sink-volume)"'';
+          "Mod4+r" = "exec slurp | grim -g - - | wl-copy";
+          "Mod4+t" = ''exec notify-send -t 3000 "$(date '+%d %A %H:%M:%S')" '';
           "Mod4+s" = "exec systemctl sleep";
           "Mod4+x" = "layout toggle split";
         }

@@ -32,7 +32,8 @@
           }
         ];
         sway-keybinds = {
-          "Mod4+a" = ''exec notify-send -t 3000 "$(batteri)"'';
+          "Mod4+a" =
+            ''exec notify-send -t 3000 "$(cat /sys/class/power_supply/BAT0/status) $(cat /sys/class/power_supply/BAT0/capacity)%"'';
         };
       })
     ]

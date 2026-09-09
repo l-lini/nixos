@@ -1,4 +1,4 @@
-{ pkgs, scripts, ... }:
+{ pkgs, ... }:
 
 {
   services.pipewire = {
@@ -8,10 +8,6 @@
 
   environment.systemPackages = with pkgs; [
     pamixer
-    scripts.audio-changer
-    scripts.audio-status
-    scripts.scroll-devices
-    scripts.scroll-items
   ];
 
   hardware.bluetooth = {

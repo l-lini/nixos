@@ -1,10 +1,6 @@
-{ pkgs, scripts, ... }:
+{ pkgs, ... }:
 
 {
-  environment.systemPackages = [
-    scripts.batteri
-  ];
-
   systemd.user = {
     services.low-battery = {
       enable = true;
@@ -13,8 +9,10 @@
       serviceConfig = {
         Type = "simple";
         ExecStart = pkgs.writeShellScript "low-battery" ''
-          if (( 10 >= $(batteri %) )) && [[ "Charging" != $(batteri status) ]];
-          then ${pkgs.lib.getExe pkgs.pkgs.libnotify} -t 60000 "$(batteri)";
+          capacity=$(cat /sys/class/power_supply/BAT0/capacity)
+          status=$(cat /sys/class/power_supply/BAT0/status)
+          if (( 10 >= $(capacity) )) && [[ "Charging" != $(status) ]];
+          then ${pkgs.lib.getExe pkgs.pkgs.libnotify} -t 60000 "$(status) $(capacity)%";
           fi;
         '';
       };

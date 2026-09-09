@@ -35,17 +35,6 @@
             builtins.trace "\nWARNING!!!: /stay doesn't exist, enable --impure please\n" { }
           else
             path.dirPathsToAttr /stay builtins.baseNameOf (path: _: builtins.readFile path);
-        scripts = path.dirPathsToAttr ./scripts path.pathToName (
-          path: name:
-          (import nixpkgs {
-            inherit system;
-            nixpkgs.allowUnfree = true;
-          }).writeShellApplication
-            {
-              inherit name;
-              text = builtins.readFile path;
-            }
-        );
       };
     in
     {
