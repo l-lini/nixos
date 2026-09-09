@@ -75,17 +75,20 @@ let
       # TODO: Volume keybinds
       # TODO: Mute keybinds
 
-      # TODO: move keybinds
-      # TODO: resize keybinds
       "Mod4+h" = "focus left";
       "Mod4+l" = "focus right";
       "Mod4+k" = "focus up";
       "Mod4+j" = "focus down";
+      "Mod4+Shift+h" = "move left";
+      "Mod4+Shift+l" = "move right";
+      "Mod4+Shift+k" = "move up";
+      "Mod4+Shift+j" = "move down";
+      "Mod4+Control+h" = "resize shrink width 10ppt";
+      "Mod4+Control+l" = "resize grow width 10ppt";
+      "Mod4+Control+k" = "resize grow height 10ppt";
+      "Mod4+Control+j" = "resize shrink height 10ppt";
 
       # TODO: unfocus floating keybind
-
-      # TODO: Fix this keybind or just add move keybinds
-      # "Mod4+x" = "layout toggle split";
     }
     # Workspace keybindings
     // builtins.zipAttrsWith (_: builtins.head) (
