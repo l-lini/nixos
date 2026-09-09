@@ -1,4 +1,5 @@
 {
+  pkgs-unstable,
   pkgs,
   # TODO: depend on global color
   ...
@@ -32,8 +33,8 @@
   environment.systemPackages = with pkgs; [
     nil
     rustfmt
-    rust-analyzer
-    cargo
+    pkgs-unstable.rust-analyzer
+    pkgs-unstable.cargo
     lua-language-server
     ripgrep
     ghc
