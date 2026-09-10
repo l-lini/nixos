@@ -97,6 +97,7 @@ let
           (if builtins.hasAttr "command" workspace then "exec ${workspace.command} & swaymsg " else "")
           + "workspace ${workspace.name}";
         "Mod4+Shift+${workspace.key}" = "move to workspace ${workspace.name}";
+        "Mod4+Control+${workspace.key}" = "workspace ${workspace.name}";
       }) workspaces
     )
     # Utility command keybindings
