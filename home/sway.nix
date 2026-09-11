@@ -139,7 +139,7 @@ in
       enable = true;
       extraArgs = [
         "--splitratio"
-        "2"
+        "1"
         "-l"
         "2"
       ];
