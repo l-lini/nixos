@@ -164,6 +164,7 @@ in
         border = 0;
         titlebar = false;
       };
+      focus.followMouse = false;
     };
     xwayland = true;
   };
