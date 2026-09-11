@@ -1,4 +1,3 @@
-# TODO: Explicit dependencies
 {
   extra-assigns ? { },
   extra-startup ? [ ],
@@ -10,8 +9,19 @@
 }:
 
 let
+  # TODO: dependencies for all of these (add an attribute
+  # for dependency package i guess)
+
+  # TODO: error for repeated use of keys
   workspaces = [
-    # TODO: prusa workspace (add terminal in command)
+    {
+      name = "prusa slicer";
+      key = "c";
+      command = "prusa-slicer & kitty";
+      assignment-criteria = {
+        app_id = "prusa-slicer";
+      };
+    }
     {
       name = "firefox";
       key = "f";
@@ -53,14 +63,15 @@ let
       };
     }
     {
-      # HACK: Had to name it 1 since defaultWorkspace wasn't working
       name = "1";
       key = "Space";
     }
   ];
   utility-commands = [
     "exec notify-send -t 3000 \"$(date '+%d %A %H:%M:%S')\""
+    # TODO: dependencies on grim and slurp
     "exec slurp | grim -g - - | wl-copy"
+    # TODO: dependencies on pactl (idk what package it comes from, look it up)
     "exec pactl set-sink-volume $(pactl get-default-sink) -20%"
     "exec pactl set-sink-volume $(pactl get-default-sink) +20%"
     "exec pactl set-sink-mute $(pactl get-default-sink) toggle"
@@ -89,6 +100,8 @@ let
   # Workspace keybindings
   // builtins.zipAttrsWith (_: builtins.head) (
     builtins.map (workspace: {
+      # TODO: only run command if the assignment-criteria is not
+      # fullfilled in this workspace
       "Mod4+${workspace.key}" =
         (if builtins.hasAttr "command" workspace then "exec ${workspace.command} & swaymsg " else "")
         + "workspace ${workspace.name}";
@@ -128,7 +141,6 @@ in
 {
   imports = [
     ./kitty.nix
-    ./wofi.nix
   ];
 
   programs.jq.enable = true;

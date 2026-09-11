@@ -5,7 +5,6 @@
     builtins.map (x: ./../home/${x}) [
       /keyd.nix
       /kitty.nix
-      /wofi.nix
     ]
     ++ [
       (import ./../home/sway.nix { })

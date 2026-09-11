@@ -8,11 +8,10 @@
 {
   imports =
     builtins.map (x: ./../home/${x}) [
+      /keyd.nix
       /kitty.nix
       /swayidle.nix
-      /keyd.nix
       /swaylock.nix
-      /wofi.nix
     ]
     ++ [
       (import ./../home/sway.nix {
