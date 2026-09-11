@@ -17,15 +17,14 @@
     ++ [
       (import ./../home/sway.nix {
         extra-startup = [
-          {
-            command = "swayidle -w before-sleep 'swaylock' timeout 0 'swaylock'";
-            always = true;
-          }
+          "swayidle -w before-sleep 'swaylock' timeout 0 'swaylock'"
         ];
-        extra-keybindings = {
-          "Mod4+a" =
-            ''exec notify-send -t 3000 "$(cat /sys/class/power_supply/BAT0/status) $(cat /sys/class/power_supply/BAT0/capacity)%"'';
-        };
+        extra-utility-commands = [
+          "exec notify-send -t 3000 \"$(cat /sys/class/power_supply/BAT0/status) $(cat /sys/class/power_supply/BAT0/capacity)%\""
+          "exec brightnessctl s 1"
+          "exec brightnessctl s 15%"
+          "exec brightnessctl s 100%"
+        ];
       })
     ]
     ++ [

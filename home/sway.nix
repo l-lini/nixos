@@ -11,6 +11,7 @@
 
 let
   workspaces = [
+    # TODO: prusa workspace (add terminal in command)
     {
       name = "firefox";
       key = "f";
@@ -58,8 +59,11 @@ let
     }
   ];
   utility-commands = [
-    ''exec notify-send -t 3000 "$(date '+%d %A %H:%M:%S')"''
+    "exec notify-send -t 3000 \"$(date '+%d %A %H:%M:%S')\""
     "exec slurp | grim -g - - | wl-copy"
+    "exec pactl set-sink-volume $(pactl get-default-sink) -20%"
+    "exec pactl set-sink-volume $(pactl get-default-sink) +20%"
+    "exec pactl set-sink-mute $(pactl get-default-sink) toggle"
   ]
   ++ extra-utility-commands;
   keybindings = {
@@ -68,9 +72,6 @@ let
     "Mod4+Shift+Escape" = "exec poweroff";
     "Mod4+Tab" = "exec systemctl sleep";
     "Mod4+Backspace" = "kill";
-
-    # TODO: Volume keybinds
-    # TODO: Mute keybinds
 
     "Mod4+h" = "focus left";
     "Mod4+l" = "focus right";
@@ -84,8 +85,6 @@ let
     "Mod4+Control+l" = "resize grow width 10ppt";
     "Mod4+Control+k" = "resize grow height 10ppt";
     "Mod4+Control+j" = "resize shrink height 10ppt";
-
-    # TODO: unfocus floating keybind
   }
   # Workspace keybindings
   // builtins.zipAttrsWith (_: builtins.head) (
@@ -105,22 +104,26 @@ let
   );
   assigns =
     extra-assigns
+    # Workspace assignments
     // builtins.listToAttrs (
       builtins.map (workspace: {
         name = workspace.name;
         value = [ workspace.assignment-criteria ];
       }) (builtins.filter (builtins.hasAttr "assignment-criteria") workspaces)
     );
-  startup = extra-startup ++ [
-    {
-      command = "swaync";
-      always = true;
-    }
-    {
-      command = ''notify-send -t 5000 "Welcome!"'';
-      always = true;
-    }
-  ];
+  startup =
+    map
+      (command: {
+        inherit command;
+        always = true;
+      })
+      (
+        extra-startup
+        ++ [
+          "swaync"
+          "notify-send -t 5000 \"Welcome!\""
+        ]
+      );
 in
 {
   imports = [
