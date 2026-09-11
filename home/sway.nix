@@ -1,7 +1,6 @@
 # TODO: Explicit dependencies
 {
   extra-assigns ? { },
-  extra-keybindings ? { },
   extra-startup ? [ ],
   extra-utility-commands ? [ ],
 }:
@@ -63,49 +62,47 @@ let
     "exec slurp | grim -g - - | wl-copy"
   ]
   ++ extra-utility-commands;
-  keybindings =
-    extra-keybindings
-    // {
-      "Mod4+Return" = "exec kitty";
-      "Mod4+Escape" = "exit";
-      "Mod4+Shift+Escape" = "exec poweroff";
-      "Mod4+Tab" = "exec systemctl sleep";
-      "Mod4+Backspace" = "kill";
+  keybindings = {
+    "Mod4+Return" = "exec kitty";
+    "Mod4+Escape" = "exit";
+    "Mod4+Shift+Escape" = "exec poweroff";
+    "Mod4+Tab" = "exec systemctl sleep";
+    "Mod4+Backspace" = "kill";
 
-      # TODO: Volume keybinds
-      # TODO: Mute keybinds
+    # TODO: Volume keybinds
+    # TODO: Mute keybinds
 
-      "Mod4+h" = "focus left";
-      "Mod4+l" = "focus right";
-      "Mod4+k" = "focus up";
-      "Mod4+j" = "focus down";
-      "Mod4+Shift+h" = "move left";
-      "Mod4+Shift+l" = "move right";
-      "Mod4+Shift+k" = "move up";
-      "Mod4+Shift+j" = "move down";
-      "Mod4+Control+h" = "resize shrink width 10ppt";
-      "Mod4+Control+l" = "resize grow width 10ppt";
-      "Mod4+Control+k" = "resize grow height 10ppt";
-      "Mod4+Control+j" = "resize shrink height 10ppt";
+    "Mod4+h" = "focus left";
+    "Mod4+l" = "focus right";
+    "Mod4+k" = "focus up";
+    "Mod4+j" = "focus down";
+    "Mod4+Shift+h" = "move left";
+    "Mod4+Shift+l" = "move right";
+    "Mod4+Shift+k" = "move up";
+    "Mod4+Shift+j" = "move down";
+    "Mod4+Control+h" = "resize shrink width 10ppt";
+    "Mod4+Control+l" = "resize grow width 10ppt";
+    "Mod4+Control+k" = "resize grow height 10ppt";
+    "Mod4+Control+j" = "resize shrink height 10ppt";
 
-      # TODO: unfocus floating keybind
-    }
-    # Workspace keybindings
-    // builtins.zipAttrsWith (_: builtins.head) (
-      builtins.map (workspace: {
-        "Mod4+${workspace.key}" =
-          (if builtins.hasAttr "command" workspace then "exec ${workspace.command} & swaymsg " else "")
-          + "workspace ${workspace.name}";
-        "Mod4+Shift+${workspace.key}" = "move to workspace ${workspace.name}";
-        "Mod4+Control+${workspace.key}" = "workspace ${workspace.name}";
-      }) workspaces
-    )
-    # Utility command keybindings
-    // builtins.zipAttrsWith (_: builtins.head) (
-      builtins.map (i: {
-        "Mod4+${builtins.toString i}" = builtins.elemAt utility-commands (i - 1);
-      }) (builtins.genList (builtins.add 1) (builtins.length utility-commands))
-    );
+    # TODO: unfocus floating keybind
+  }
+  # Workspace keybindings
+  // builtins.zipAttrsWith (_: builtins.head) (
+    builtins.map (workspace: {
+      "Mod4+${workspace.key}" =
+        (if builtins.hasAttr "command" workspace then "exec ${workspace.command} & swaymsg " else "")
+        + "workspace ${workspace.name}";
+      "Mod4+Shift+${workspace.key}" = "move to workspace ${workspace.name}";
+      "Mod4+Control+${workspace.key}" = "workspace ${workspace.name}";
+    }) workspaces
+  )
+  # Utility command keybindings
+  // builtins.zipAttrsWith (_: builtins.head) (
+    builtins.map (i: {
+      "Mod4+${builtins.toString i}" = builtins.elemAt utility-commands (i - 1);
+    }) (builtins.genList (builtins.add 1) (builtins.length utility-commands))
+  );
   assigns =
     extra-assigns
     // builtins.listToAttrs (
