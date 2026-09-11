@@ -25,9 +25,6 @@
           "exec brightnessctl s 100%"
         ];
       })
-    ]
-    ++ [
-      inputs.dat566.homeModules.vscode
     ];
 
   home.username = username;
