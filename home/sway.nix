@@ -187,7 +187,7 @@ in
         padding = 10;
         font = "Comic Mono 16";
         margin = 0;
-        width = 320;
+        width = 480;
       };
     };
     autotiling = {
