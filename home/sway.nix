@@ -179,8 +179,17 @@ in
   programs.jq.enable = true;
 
   services = {
-    # TODO: Mono-space font for notifications
-    swaync.enable = true;
+    mako = {
+      enable = true;
+      settings = {
+        background-color = "#000000";
+        border-size = 0;
+        padding = 10;
+        font = "Comic Mono 16";
+        margin = 0;
+        width = 320;
+      };
+    };
     autotiling = {
       enable = true;
       extraArgs = [
