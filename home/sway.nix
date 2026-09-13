@@ -68,9 +68,10 @@ let
     }
   ];
   utility-commands = [
-    "exec notify-send -t 3000 \"$(date '+%d %A %H:%M:%S')\""
-    # TODO: dependencies on grim and slurp
-    "exec slurp | grim -g - - | wl-copy"
+    "exec notify-send -t 3000 \"$(date '+%d %A %H:%M:%S')\"" # TODO: Dependency on swaync/mako
+    "exec notify-send -t 3000 \"$(nmcli -f NAME,TYPE -c no connection show --active | grep --color=never -E 'wifi|ethernet')\"" # TODO: depencency on nmcli (networkmanager)
+    "exec slurp | grim -g - - | wl-copy" # TODO: dependency on grim and slurp
+
     # TODO: dependencies on pactl (idk what package it comes from, look it up)
     "exec pactl set-sink-volume $(pactl get-default-sink) -20%"
     "exec pactl set-sink-volume $(pactl get-default-sink) +20%"
@@ -146,6 +147,7 @@ in
   programs.jq.enable = true;
 
   services = {
+    # TODO: Mono-space font for notifications
     swaync.enable = true;
     autotiling = {
       enable = true;
