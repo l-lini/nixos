@@ -14,6 +14,27 @@ let
 
   # TODO: error for repeated use of keys
   workspaces = [
+    (
+      let
+        version = "26.2";
+      in
+      {
+        name = "minecraft";
+        key = "m";
+        command = "prismlauncher --launch ${version}";
+        assignment-criteria = {
+          class = "Minecraft ${version}";
+        };
+      }
+    )
+    {
+      name = "prismlauncher";
+      key = "r"; # TODO: Better key
+      command = "prismlauncher";
+      assignment-criteria = {
+        app_id = "org.prismlauncher.PrismLauncher";
+      };
+    }
     {
       name = "prusa slicer";
       key = "c";
@@ -112,9 +133,20 @@ let
   )
   # Utility command keybindings
   // builtins.zipAttrsWith (_: builtins.head) (
-    builtins.map (i: {
-      "Mod4+${builtins.toString i}" = builtins.elemAt utility-commands (i - 1);
-    }) (builtins.genList (builtins.add 1) (builtins.length utility-commands))
+    builtins.map (
+      i':
+      let
+        key =
+          if i' == 10 then
+            "0"
+          else
+            # TODO: Consider generating more than 10 keybinds
+            builtins.toString i';
+      in
+      {
+        "Mod4+${key}" = builtins.elemAt utility-commands (i' - 1);
+      }
+    ) (builtins.genList (builtins.add 1) (builtins.length utility-commands))
   );
   assigns =
     extra-assigns
