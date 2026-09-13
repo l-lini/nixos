@@ -14,6 +14,7 @@
     checkout = "git checkout -b";
     merge = "git merge --squash";
     clone = "git clone";
+    show = "git show";
   };
 
   programs.git = {
