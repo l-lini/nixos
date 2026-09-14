@@ -21,7 +21,7 @@
         colors = import ./lib/color.nix;
         pkgs-unstable = import nixpkgs-unstable {
           inherit system;
-          nixpkgs.allowUnfree = true;
+          config.allowUnfree = true;
         };
         system = "x86_64-linux";
         os = path.dirPathsToAttr ./os path.pathToName (path: _: import path);
