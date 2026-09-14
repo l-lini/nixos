@@ -188,6 +188,7 @@ in
   programs.zsh.initContent = config.programs.zsh.shellInit;
   programs.wezterm = {
     enable = true;
+    # TODO: ESC as copy mode keybind
     extraConfig = ''
       local wezterm = require 'wezterm'
       local config = wezterm.config_builder()
@@ -216,7 +217,7 @@ in
         font = "Comic Mono 16";
         margin = 0;
         width = 480;
-        # TODO: default timer
+        default-timeout = 60 * 1000;
       };
     };
     autotiling = {
