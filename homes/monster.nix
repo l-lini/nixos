@@ -4,7 +4,6 @@
   imports =
     builtins.map (x: ./../home/${x}) [
       /keyd.nix
-      /kitty.nix
     ]
     ++ [
       (import ./../home/sway.nix { })

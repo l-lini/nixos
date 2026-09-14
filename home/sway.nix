@@ -5,6 +5,8 @@
 }:
 {
   # TODO: move parameter defaults to a dependency we are abstracted from sway
+  lib,
+  config,
   ...
 }:
 
@@ -46,7 +48,7 @@ let
     {
       name = "prusa slicer";
       key = "c";
-      command = "prusa-slicer & kitty";
+      command = "prusa-slicer & wezterm";
       assignment-criteria = {
         app_id = "prusa-slicer";
       };
@@ -108,7 +110,7 @@ let
   ]
   ++ extra-utility-commands;
   keybindings = {
-    "Mod4+Return" = "exec kitty";
+    "Mod4+Return" = "exec wezterm"; # TODO: consider putting this in workspace 1
     "Mod4+Escape" = "exit";
     "Mod4+Shift+Escape" = "exec poweroff";
     "Mod4+Tab" = "exec systemctl sleep";
@@ -180,11 +182,29 @@ let
       );
 in
 {
-  imports = [
-    ./kitty.nix
-  ];
-
   programs.jq.enable = true;
+
+  # Terminal. TODO: Move sway into directory and this into a submodule
+  programs.zsh.initContent = config.programs.zsh.shellInit;
+  programs.wezterm = {
+    enable = true;
+    extraConfig = ''
+      local wezterm = require 'wezterm'
+      local config = wezterm.config_builder()
+
+      config.font_size = 16
+      config.font = wezterm.font("Comic Mono")
+      config.enable_tab_bar = false
+      config.window_padding = {
+        left = 0,
+        right = 0,
+        top = 0,
+        bottom = 0,
+      }
+
+      return config
+    '';
+  };
 
   services = {
     mako = {
@@ -196,6 +216,7 @@ in
         font = "Comic Mono 16";
         margin = 0;
         width = 480;
+        # TODO: default timer
       };
     };
     autotiling = {

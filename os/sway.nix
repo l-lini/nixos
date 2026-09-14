@@ -10,18 +10,13 @@
   environment.loginShellInit = "[[ \"$(tty)\" == /dev/tty1 ]] && sway";
 
   environment.systemPackages = with pkgs; [
-    prismlauncher
-    obsidian
-    clonehero
-    jq
     qsynth
     minitube
     prismlauncher
-    heroic
-    r2modman
+    r2modman # TODO: workspace
     prusa-slicer
     pavucontrol
-    inkscape
+    inkscape # TODO: workspace
     mupdf
     grim
     slurp
@@ -30,6 +25,5 @@
     slack
     libnotify
     firefox
-    qutebrowser
   ];
 }

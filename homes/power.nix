@@ -9,7 +9,6 @@
   imports =
     builtins.map (x: ./../home/${x}) [
       /keyd.nix
-      /kitty.nix
       /swaylock.nix
     ]
     ++ [
