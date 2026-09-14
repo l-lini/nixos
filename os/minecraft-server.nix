@@ -8,6 +8,7 @@
     eula = true;
     openFirewall = true;
     declarative = true;
+    dataDir = "/home/lini/.minecraft";
     serverProperties = {
       server-port = port;
       difficulty = 3; # Hard
