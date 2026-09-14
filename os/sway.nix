@@ -16,7 +16,6 @@
     jq
     qsynth
     minitube
-    spotify
     prismlauncher
     heroic
     r2modman
