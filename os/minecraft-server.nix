@@ -11,6 +11,7 @@
     serverProperties = {
       server-port = port;
       difficulty = 3; # Hard
+      allow-cheats = true;
     };
     jvmOpts = "-Xms4G -Xmx4G";
   };
