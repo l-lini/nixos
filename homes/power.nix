@@ -10,7 +10,6 @@
     builtins.map (x: ./../home/${x}) [
       /keyd.nix
       /kitty.nix
-      /swayidle.nix
       /swaylock.nix
     ]
     ++ [
