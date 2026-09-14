@@ -28,6 +28,14 @@ let
       }
     )
     {
+      name = "minitube";
+      key = "y";
+      command = "minitube";
+      assignment-criteria = {
+        app_id = "org.tordini.flavio.";
+      };
+    }
+    {
       name = "prismlauncher";
       key = "r"; # TODO: Better key
       command = "prismlauncher";
