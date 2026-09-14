@@ -19,6 +19,19 @@
   services.openssh = {
     enable = true;
     ports = [ port ];
+
+    hostKeys = [
+      {
+        bits = 4096;
+        openSSHFormat = true;
+        path = "/home/lini/.ssh_host_rsa_key";
+        type = "rsa";
+      }
+      {
+        path = "/home/lini/.ssh_host_ed25519_key";
+        type = "ed25519";
+      }
+    ];
   };
 
   networking = {
