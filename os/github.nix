@@ -2,7 +2,6 @@
 
 {
   programs.git.config = {
-    push.autoSetupRemote = "true";
     user = {
       name = "l-lini";
       email = "119787571+l-lini@users.noreply.github.com";

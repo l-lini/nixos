@@ -9,23 +9,13 @@
     u = "git pull";
     d = "git diff";
     l = "git log";
-    restore = "git restore";
-    switch = "git switch";
-    checkout = "git checkout -b";
-    merge = "git merge --squash";
-    clone = "git clone";
-    show = "git show";
   };
 
   programs.git = {
     enable = true;
     config = {
       init.defaultBranch = "main";
-      branch.main.mergeOptions = "--squash";
-      push = {
-        default = "simple";
-        # autoSetupRemote = true;
-      };
+      push.autoSetupRemote = true;
       pull = {
         rebase = true;
         autoStash = true;
