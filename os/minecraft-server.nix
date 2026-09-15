@@ -11,12 +11,11 @@
     eula = true;
     openFirewall = true;
     declarative = true;
-    dataDir = "/home/lini/.minecraft";
+    dataDir = "/stay/minecraft";
     serverProperties = {
       server-port = port;
-      difficulty = 3; # Hard
+      difficulty = 3;
       motd = "Lini's server!";
-      allow-cheats = true;
     };
     jvmOpts = "-Xms4G -Xmx4G";
   };
