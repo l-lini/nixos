@@ -1,7 +1,10 @@
 { port }:
-{ pkgs-unstable, ... }:
+{ username, pkgs-unstable, ... }:
 
 {
+  users.users.${username}.extraGroups = [
+    "minecraft"
+  ];
   services.minecraft-server = {
     enable = true;
     package = pkgs-unstable.minecraftServers.vanilla;
