@@ -48,7 +48,7 @@ let
     {
       name = "prusa slicer";
       key = "c";
-      command = "prusa-slicer & wezterm";
+      command = "prusa-slicer";
       assignment-criteria = {
         app_id = "prusa-slicer";
       };
@@ -96,6 +96,10 @@ let
     {
       name = "1";
       key = "Space";
+      command = "wezterm";
+      assignment-criteria = {
+        app_id = "org.wezfurlong.wezterm";
+      };
     }
   ];
   utility-commands = [
@@ -110,7 +114,6 @@ let
   ]
   ++ extra-utility-commands;
   keybindings = {
-    "Mod4+Return" = "exec wezterm"; # TODO: consider putting this in workspace 1
     "Mod4+Escape" = "exit";
     "Mod4+Shift+Escape" = "exec poweroff";
     "Mod4+Tab" = "exec systemctl sleep";
