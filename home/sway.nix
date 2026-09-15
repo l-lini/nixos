@@ -18,7 +18,7 @@ let
   workspaces = [
     (
       let
-        version = "26.2";
+        version = "26.2"; # TODO: store same version in minecraft-server
       in
       {
         name = "minecraft";
@@ -132,13 +132,12 @@ let
   # Workspace keybindings
   // builtins.zipAttrsWith (_: builtins.head) (
     builtins.map (workspace: {
-      # TODO: only run command if the assignment-criteria is not
-      # fullfilled in this workspace
       "Mod4+${workspace.key}" =
-        (if builtins.hasAttr "command" workspace then "exec ${workspace.command} & swaymsg " else "")
-        + "workspace ${workspace.name}";
+        if builtins.hasAttr "command" workspace then
+          "exec sh -c \"if [ $(swaymsg -t get_workspaces | jq '.[] | select(.focused == true) | .name') == ${workspace.name} ]; then ${workspace.command}; fi & swaymsg workspace ${workspace.name}\""
+        else
+          "workspace ${workspace.name}";
       "Mod4+Shift+${workspace.key}" = "move to workspace ${workspace.name}";
-      "Mod4+Control+${workspace.key}" = "workspace ${workspace.name}";
     }) workspaces
   )
   # Utility command keybindings
