@@ -16,6 +16,7 @@
       server-port = port;
       difficulty = 3;
       motd = "Lini's server!";
+      view-distance = 32;
     };
     jvmOpts = "-Xms4G -Xmx4G";
   };
