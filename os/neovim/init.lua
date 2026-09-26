@@ -1,4 +1,3 @@
--- keybinds
 vim.g.mapleader = " "
 vim.opt.wrap = false
 vim.keymap.set("n", "<C-w>", function()
@@ -79,7 +78,11 @@ vim.opt.cmdheight = 0
 vim.opt.ruler = false
 
 -- lsp
-vim.lsp.enable({ 'bash_ls', 'nil', 'hls', 'lua_ls', 'rust_analyzer' })
+vim.lsp.enable({ 'wgsl-analyzer', 'bash_ls', 'nil', 'hls', 'lua_ls', 'rust_analyzer' })
+vim.lsp.config('wgsl-analyzer', {
+	cmd = { "wgsl-analyzer" },
+	filetypes = { "wgsl" },
+})
 vim.lsp.config('bash_ls', {
 	cmd = { "bash-language-server", "start" },
 	filetypes = { "sh" },
@@ -87,6 +90,15 @@ vim.lsp.config('bash_ls', {
 vim.lsp.config('nil', {
 	cmd = { "nil" },
 	filetypes = { "nix" },
+	settings = {
+		["nil"] = {
+			nix = {
+				flake = {
+					autoArchive = true,
+				},
+			},
+		},
+	},
 })
 vim.lsp.config('rust_analyzer', {
 	settings = {

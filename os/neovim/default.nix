@@ -40,5 +40,6 @@
     ghc
     haskell-language-server
     bash-language-server
+    wgsl-analyzer
   ];
 }
