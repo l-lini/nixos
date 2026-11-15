@@ -13,7 +13,6 @@
     rofi
     thunderbird
     qsynth
-    minitube
     prismlauncher
     r2modman # TODO: workspace
     prusa-slicer
