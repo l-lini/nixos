@@ -30,6 +30,14 @@ let
       }
     )
     {
+      name = "thunderbird";
+      key = "b";
+      command = "thunderbird";
+      assignment-criteria = {
+        app_id = "thunderbird";
+      };
+    }
+    {
       name = "minitube";
       key = "y";
       command = "minitube";
