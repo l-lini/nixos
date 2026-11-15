@@ -11,8 +11,8 @@
         ExecStart = pkgs.writeShellScript "low-battery" ''
           capacity=$(cat /sys/class/power_supply/BAT0/capacity)
           status=$(cat /sys/class/power_supply/BAT0/status)
-          if (( 10 >= $(capacity) )) && [[ "Charging" != $(status) ]];
-          then ${pkgs.lib.getExe pkgs.pkgs.libnotify} -t 60000 "$(status) $(capacity)%";
+          if (( $capacity <= 10 )) && [[ "Charging" != $status ]];
+          then ${pkgs.lib.getExe pkgs.pkgs.libnotify} -t 60000 "FYI: I am dying";
           fi;
         '';
       };
