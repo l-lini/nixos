@@ -30,6 +30,14 @@ let
       }
     )
     {
+      name = "blueman";
+      key = "u";
+      command = "blueman-manager";
+      assignment-criteria = {
+        app_id = ".blueman-manager-wrapped";
+      };
+    }
+    {
       name = "slack";
       key = "a";
       command = "slack";
