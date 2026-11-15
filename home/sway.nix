@@ -30,6 +30,14 @@ let
       }
     )
     {
+      name = "slack";
+      key = "a";
+      command = "slack";
+      assignment-criteria = {
+        app_id = "Slack";
+      };
+    }
+    {
       name = "thunderbird";
       key = "b";
       command = "thunderbird";
