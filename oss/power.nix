@@ -11,6 +11,7 @@
   imports = builtins.map (x: ./../os + x) [
     /home-manager.nix
     /java.nix
+    /adb.nix
     /sudo.nix
     /docker.nix
     /alias.nix
