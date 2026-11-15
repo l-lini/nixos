@@ -134,6 +134,7 @@ let
     "Mod4+Shift+Escape" = "exec poweroff";
     "Mod4+Tab" = "exec systemctl sleep";
     "Mod4+Backspace" = "kill";
+    "Mod4+Return" = "exec rofi -show run";
 
     "Mod4+h" = "focus left";
     "Mod4+l" = "focus right";
