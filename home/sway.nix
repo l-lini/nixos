@@ -233,7 +233,29 @@ in
         selection_fg = '#${background}',
         selection_bg = '#${foreground}',
 
-        scrollbar_thumb = '#${foreground}'
+        scrollbar_thumb = '#${foreground}',
+
+        ansi = {
+          '#${background}',
+          '#${identifier}',
+          '#${literal}',
+          '#${comment}',
+          '#${type}',
+          '#${keyword}',
+          '#${identifier}',
+          '#${foreground}',
+        },
+
+        brights = {
+          '#${background}',
+          '#${identifier}',
+          '#${literal}',
+          '#${comment}',
+          '#${type}',
+          '#${keyword}',
+          '#${identifier}',
+          '#${foreground}',
+        },
       }
 
       return config
