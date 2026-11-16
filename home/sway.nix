@@ -286,6 +286,7 @@ in
     mako = {
       enable = true;
       settings = {
+        layer = "overlay";
         background-color = "#000000";
         border-size = 0;
         padding = 10;
