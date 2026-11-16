@@ -14,7 +14,7 @@
     viAlias = true;
     vimAlias = true;
     configure = {
-      customLuaRC = builtins.readFile ./init.lua;
+      customLuaRC = builtins.readFile ./init.lua + import ./colors.nix colors;
       packages.myVimPackage = with pkgs.vimPlugins; {
         start = [
           nvim-treesitter.withAllGrammars

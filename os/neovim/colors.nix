@@ -15,6 +15,7 @@
   -- Identifier
   vim.api.nvim_set_hl(0, "Identifier", { fg = "#${identifier}" })
   vim.api.nvim_set_hl(0, "@variable", { fg = "#${identifier}" })
+  vim.api.nvim_set_hl(0, "Function", { fg = "#${identifier}" })
 
   -- Comment
   vim.api.nvim_set_hl(0, "Comment", { fg = "#${comment}" })
