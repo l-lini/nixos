@@ -32,6 +32,14 @@ let
       }
     )
     {
+      name = "inkscape";
+      key = "i";
+      command = "inkscape";
+      assignment-criteria = {
+        app_id = "org.inkscape.Inkscape";
+      };
+    }
+    {
       name = "blueman";
       key = "u";
       command = "blueman-manager";
