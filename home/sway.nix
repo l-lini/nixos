@@ -270,6 +270,18 @@ in
     '';
   };
 
+  services.wlsunset = {
+    enable = true;
+
+    temperature = {
+      day = 6500;
+      night = 2000;
+    };
+
+    sunrise = "08:00";
+    sunset = "22:00";
+  };
+
   services = {
     mako = {
       enable = true;
