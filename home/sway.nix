@@ -289,7 +289,7 @@ in
         background-color = "#000000";
         border-size = 0;
         padding = 10;
-        font = "Comic Mono 16";
+        font = "${font} 16";
         margin = 0;
         width = 480;
         default-timeout = 60 * 1000;
