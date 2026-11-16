@@ -126,14 +126,3 @@ vim.api.nvim_create_autocmd("Filetype", {
 		local ok = pcall(vim.treesitter.start, args.buf)
 	end,
 })
-
--- colors
-vim.api.nvim_set_hl(0, "Normal", { fg = "#ffffff", bg = "#000000" })
-vim.api.nvim_set_hl(0, "Diagnostic", { fg = "#f38ba8" })
-vim.api.nvim_set_hl(0, "Identifier", { fg = "#f9e2af" })
-vim.api.nvim_set_hl(0, "@variable", { fg = "#f9a28f" })
-vim.api.nvim_set_hl(0, "Comment", { fg = "#6c7086" })
-vim.api.nvim_set_hl(0, "Function", { fg = "#89b4fa" })
-vim.api.nvim_set_hl(0, "Special", { fg = "#f5c2e7" })
-vim.api.nvim_set_hl(0, "String", { fg = "#a6e3a1" })
-vim.api.nvim_set_hl(0, "Macro", { fg = "#94e2d5" })

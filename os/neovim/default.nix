@@ -1,7 +1,7 @@
 {
   pkgs-unstable,
   pkgs,
-  # TODO: depend on global color
+  colors,
   ...
 }:
 
