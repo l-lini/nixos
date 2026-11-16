@@ -77,6 +77,9 @@ vim.opt.laststatus = 0
 vim.opt.cmdheight = 0
 vim.opt.ruler = false
 
+-- format keybind
+vim.keymap.set('n', '<leader>f', vim.lsp.buf.format)
+
 -- lsp
 vim.lsp.enable({ 'wgsl-analyzer', 'bash_ls', 'nil', 'hls', 'lua_ls', 'rust_analyzer' })
 vim.lsp.config('wgsl-analyzer', {
