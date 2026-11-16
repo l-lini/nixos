@@ -10,6 +10,7 @@
   environment.loginShellInit = "[[ \"$(tty)\" == /dev/tty1 ]] && sway";
 
   environment.systemPackages = with pkgs; [
+    wl-mirror
     rofi
     thunderbird
     qsynth

@@ -145,6 +145,7 @@ let
     "Mod4+Tab" = "exec systemctl sleep";
     "Mod4+Backspace" = "kill";
     "Mod4+Return" = "exec rofi -show run";
+    "Mod4+Shift+Return" = "exec wl-mirror --fullscreen-output HDMI-A-1 eDP-1";
 
     "Mod4+h" = "focus left";
     "Mod4+l" = "focus right";
