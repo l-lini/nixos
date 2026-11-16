@@ -7,6 +7,8 @@
   # TODO: move parameter defaults to a dependency we are abstracted from sway
   lib,
   config,
+  font,
+  colors,
   ...
 }:
 
@@ -208,18 +210,30 @@ in
   programs.wezterm = {
     enable = true;
     # TODO: ESC as copy mode keybind
-    extraConfig = ''
+    extraConfig = with colors; ''
       local wezterm = require 'wezterm'
       local config = wezterm.config_builder()
 
       config.font_size = 16
-      config.font = wezterm.font("Comic Mono")
+      config.font = wezterm.font("${font}")
       config.enable_tab_bar = false
       config.window_padding = {
         left = 0,
         right = 0,
         top = 0,
         bottom = 0,
+      }
+      config.colors = {
+        foreground = '#${foreground}',
+        background = '#${background}',
+
+        cursor_fg = '#${background}',
+        cursor_bg = '#${foreground}',
+
+        selection_fg = '#${background}',
+        selection_bg = '#${foreground}',
+
+        scrollbar_thumb = '#${foreground}'
       }
 
       return config

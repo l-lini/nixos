@@ -19,6 +19,7 @@
       args = rec {
         inherit inputs path;
         colors = import ./lib/color.nix;
+        font = import ./lib/font.nix;
         pkgs-unstable = import nixpkgs-unstable {
           inherit system;
           config.allowUnfree = true;

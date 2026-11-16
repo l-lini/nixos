@@ -2,6 +2,7 @@
   util,
   pkgs,
   lib,
+  colors,
   ...
 }:
 
@@ -16,5 +17,23 @@
   console = {
     earlySetup = true;
     font = "latarcyrheb-sun32"; # Enums, why are they not enums );
+    colors = with colors; [
+      background
+      foreground
+      identifier
+      type
+      literal
+      keyword
+      comment
+      comment
+      background
+      foreground
+      identifier
+      type
+      literal
+      keyword
+      comment
+      comment
+    ];
   };
 }
