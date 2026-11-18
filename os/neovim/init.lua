@@ -4,6 +4,66 @@ vim.keymap.set("n", "<C-w>", function()
 	vim.opt.wrap = not vim.opt.wrap:get()
 end)
 
+-- Autocomplete (nvim-cmp)
+vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
+
+local cmp = require('cmp')
+local luasnip = require('luasnip')
+
+local select_opts = { behavior = cmp.SelectBehavior.Select }
+cmp.setup({
+	enabled = function()
+		return false
+	end,
+	snippet = {
+		expand = function(args)
+			luasnip.lsp_expand(args.body)
+		end
+	},
+	sources = {
+		-- {name = 'path'},
+		{ name = 'nvim_lsp', keyword_length = 1 },
+		-- {name = 'buffer', keyword_length = 3},
+		{ name = 'luasnip' },
+	},
+	window = {
+		documentation = cmp.config.window.bordered()
+	},
+	formatting = {
+		fields = { 'menu', 'abbr', 'kind' },
+		format = function(entry, item)
+			local menu_icon = {
+				nvim_lsp = 'λ',
+				luasnip = '⋗',
+				-- buffer = 'Ω',
+				-- path = '🖫',
+			}
+
+			item.menu = menu_icon[entry.source.name]
+			return item
+		end,
+	},
+	mapping = {
+		['<C-p>'] = cmp.mapping(function(fallback)
+			if cmp.visible() then
+				cmp.select_prev_item(select_opts)
+			else
+				fallback()
+			end
+		end)
+		['<C-n>'] = cmp.mapping(function(fallback)
+			if cmp.visible() then
+				cmp.select_next_item(select_opts)
+			else
+				fallback()
+			end
+		end),
+
+		['<C-u>'] = cmp.mapping.scroll_docs(-4),
+		['<C-d>'] = cmp.mapping.scroll_docs(4),
+	},
+})
+
 -- diagnostics
 do
 	local ERROR = vim.diagnostic.severity.ERROR

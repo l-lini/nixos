@@ -25,6 +25,10 @@
           plenary-nvim # dependency for telescope-file-browser
           vim-sleuth
           undotree
+          nvim-cmp
+          luasnip
+          cmp_luasnip
+          cmp-nvim-lsp
         ];
       };
     };
