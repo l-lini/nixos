@@ -50,7 +50,7 @@ cmp.setup({
 			else
 				fallback()
 			end
-		end)
+		end),
 		['<C-n>'] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_next_item(select_opts)
